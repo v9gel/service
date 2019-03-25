@@ -46,3 +46,34 @@ let subdivisions = [
 subdivisions.map(value => {
     db['subdivisions'].create(value)
 });
+
+//Клиенты
+let clients = [
+    {
+        surname: 'Колесов',
+        name: 'Николай',
+        patronymic: 'Иванович',
+        phone: '89605674365'
+    },
+    {
+        surname: 'Петрова',
+        name: 'Елена',
+        patronymic: 'Генадьевна',
+        phone: '89606574839'
+    },
+    {
+        surname: 'Катькалова',
+        name: 'Анна',
+        patronymic: 'Андреевна',
+        phone: '86960555555'
+    },
+    {
+        surname: 'Миронов',
+        name: 'Иван',
+        patronymic: 'Юрьевич',
+        phone: '89656785647'
+    },
+];
+clients.map(value => {
+    db['clients'].create(value)
+});

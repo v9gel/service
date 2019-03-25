@@ -27,4 +27,13 @@ router.get('/subdivisions', function(req, res, next) {
 
 });
 
+router.get('/clients', function(req, res, next) {
+    db['clients'].findAll({
+        attributes: ['id', 'surname', 'name', 'patronymic', 'phone']
+    })
+        .then(clients => {
+            res.json(clients)
+        });
+});
+
 module.exports = router;
