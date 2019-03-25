@@ -26,7 +26,7 @@ module.exports = function(sequelize, Sequelize) {
         }
     });
 
-    Subdivisions.belongsTo(Activities(sequelize, Sequelize))
+    Subdivisions.belongsTo(Activities(sequelize, Sequelize));
 
     return Subdivisions;
 

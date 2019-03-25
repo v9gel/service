@@ -16,13 +16,13 @@
 
   "test": {
 
-    "username": "",
+    "username": "root",
 
     "password": null,
 
-    "database": "",
+    "database": "service",
 
-    "host": "",
+    "host": "localhost",
 
     "dialect": "mysql"
 

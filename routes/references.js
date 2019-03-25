@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index')
 
+/* Виды деятельности */
 router.get('/activities', function(req, res, next) {
     db['activities'].findAll({
         attributes: ['id', 'name', 'code']
@@ -11,6 +12,87 @@ router.get('/activities', function(req, res, next) {
         });
 });
 
+/* Дефекты */
+router.get('/defects', function(req, res, next) {
+    db['defects'].findAll({
+        attributes: ['id', 'name', 'code']
+    })
+        .then(defects => {
+            res.json(defects)
+        });
+});
+
+/* Модели */
+router.get('/models', function(req, res, next) {
+    db['models'].findAll({
+        attributes: ['id', 'name', 'code'],
+        include: [
+            {
+                model: db['views'],
+                attributes: ['id', 'name'],
+            },
+            {
+                model: db['providers'],
+                attributes: ['id', 'name'],
+            }
+        ]
+    })
+        .then(models => {
+            res.json(models)
+        });
+});
+
+/* Упаковки */
+router.get('/packs', function(req, res, next) {
+    db['packs'].findAll({
+        attributes: ['id', 'name']
+    })
+        .then(packs => {
+            res.json(packs)
+        });
+});
+
+/* Статусы */
+router.get('/statuses', function(req, res, next) {
+    db['statuses'].findAll({
+        attributes: ['id', 'name']
+    })
+        .then(statuses => {
+            res.json(statuses)
+        });
+});
+
+/* Производители */
+router.get('/providers', function(req, res, next) {
+    db['providers'].findAll({
+        attributes: ['id', 'name', 'code']
+    })
+        .then(providers => {
+            res.json(providers)
+        });
+});
+
+/* Услуги */
+router.get('/services', function(req, res, next) {
+    db['services'].findAll({
+        attributes: ['id', 'name', 'code']
+    })
+        .then(services => {
+            res.json(services)
+        });
+});
+
+/* Виды техники */
+router.get('/views', function(req, res, next) {
+    db['views'].findAll({
+        attributes: ['id', 'name', 'code']
+    })
+        .then(views => {
+            res.json(views)
+        });
+});
+
+/* Подразделения */
 router.get('/subdivisions', function(req, res, next) {
     db['subdivisions'].findAll({
         attributes: ['id', 'name', 'code', 'kladr'],

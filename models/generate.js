@@ -22,7 +22,7 @@ activities.map(value => {
 //Подразделения
 let subdivisions = [
     {
-        name: 'Главный склад',
+        name: 'Склад',
         code: '1000',
         kladr: '2200000100009480045',
         password: '0000',
@@ -36,7 +36,7 @@ let subdivisions = [
         activityId: 2
     },
     {
-        name: 'На малахова',
+        name: 'Точка Малахова',
         code: '1002',
         kladr: '2200000100009480045',
         password: '0000',
@@ -76,4 +76,233 @@ let clients = [
 ];
 clients.map(value => {
     db['clients'].create(value)
+});
+
+//Статусы
+let statuses = [
+    {name:'Принят в ремонт'},
+    {name:'Отремонтирован'},
+    {name:'Выдан'}
+];
+statuses.map(value => {
+    db['statuses'].create(value)
+});
+
+//Производители
+let provieders = [
+    {
+        name: 'LG',
+        code: '1'
+    },
+    {
+        name: 'Bosh',
+        code: '2'
+    },
+    {
+        name: 'Samsung',
+        code: '3'
+    },
+    {
+        name: 'Candy',
+        code: '4'
+    },
+    {
+        name: 'Indesit',
+        code: '5'
+    },
+    {
+        name: 'Siemens',
+        code: '6'
+    },
+    {
+        name: 'Nokia',
+        code: '7'
+    },
+    {
+        name: 'Apple',
+        code: '8'
+    },
+    {
+        name: 'Vestel',
+        code: '9'
+    },
+    {
+        name: 'Beko',
+        code: '10'
+    },
+    {
+        name: 'Renova',
+        code: '11'
+    },
+    {
+        name: 'Rolsen',
+        code: '12'
+    },
+
+];
+provieders.map(value => {
+    db['providers'].create(value)
+});
+
+//Производители
+let views = [
+    {
+        name: 'Телевизор',
+        code: '1'
+    },
+    {
+        name: 'Стиральная машина',
+        code: '2'
+    },
+    {
+        name: 'Холодильник',
+        code: '3'
+    },
+    {
+        name: 'Электрическая плита',
+        code: '4'
+    },
+    {
+        name: 'Пылесос',
+        code: '5'
+    },
+    {
+        name: 'Мультиварка',
+        code: '6'
+    },
+    {
+        name: 'Телефон',
+        code: '7'
+    },
+    {
+        name: 'Вентилятор',
+        code: '8'
+    },
+    {
+        name: 'Эпилятор',
+        code: '9'
+    },
+    {
+        name: 'Хлебопечка',
+        code: '10'
+    },
+    {
+        name: 'Renova',
+        code: '11'
+    },
+    {
+        name: 'Rolsen',
+        code: '12'
+    },
+
+];
+views.map(value => {
+    db['views'].create(value)
+});
+
+//Модели
+let models = [
+    {
+        name: 'X1',
+        code: '1',
+        providerId: 1,
+        viewId: 1
+    },
+    {
+        name: 'MK2',
+        code: '2',
+        providerId: 2,
+        viewId: 2
+    },
+    {
+        name: 'Kl',
+        code: '3',
+        providerId: 3,
+        viewId: 3
+    },
+    {
+        name: 'R54',
+        code: '4',
+        providerId: 4,
+        viewId: 4
+    },
+    {
+        name: 'RESD',
+        code: '5',
+        providerId: 5,
+        viewId: 5
+    },
+    {
+        name: 'WER',
+        code: '6',
+        providerId: 6,
+        viewId: 6
+    },
+    {
+        name: 'EFD',
+        code: '7',
+        proviederId: 7,
+        viewId: 7
+    }
+];
+models.map(value => {
+    db['models'].create(value)
+});
+
+//Статусы
+let packs = [
+    {name:'Банка'},
+    {name:'Туба'},
+    {name:'Контейнер'},
+    {name:'Цистерна'},
+    {name:'Баллон'},
+    {name:'Ящик'},
+    {name:'Бочка'},
+    {name:'Корзина'},
+    {name:'Картонная коробка'},
+    {name:'Тетрапак'},
+    {name:'Мешок'},
+    {name:'Пакет'},
+    {name:'Оберточная бумага'}
+];
+packs.map(value => {
+    db['packs'].create(value)
+});
+
+//Дефекты
+let defects = [
+    {
+        name: 'Разбитый экран',
+        code: '1000'
+    },
+    {
+        name: 'Перегрев',
+        code: '1001'
+    },
+    {
+        name: 'Громкая работа',
+        code: '1002'
+    }
+];
+defects.map(value => {
+    db['defects'].create(value)
+});
+
+//Дефекты
+let services = [
+    {
+        name: 'Замена экрана',
+        code: '1000'
+    },
+    {
+        name: 'Смазка',
+        code: '1001'
+    },
+    {
+        name: 'Замена кулера',
+        code: '1002'
+    }
+];
+services.map(value => {
+    db['services'].create(value)
 });
