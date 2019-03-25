@@ -1,0 +1,45 @@
+{
+
+  "development": {
+
+    "username": "vh270519_service",
+
+    "password": "Ntcnbhjdfybt01",
+
+    "database": "vh270519_service",
+
+    "host": "vh108.eurobyte.ru",
+
+    "dialect": "mysql"
+
+  },
+
+  "test": {
+
+    "username": "",
+
+    "password": null,
+
+    "database": "",
+
+    "host": "",
+
+    "dialect": "mysql"
+
+  },
+
+  "production": {
+
+    "username": "",
+
+    "password": null,
+
+    "database": "",
+
+    "host": "127.0.0.1",
+
+    "dialect": "mysql"
+
+  }
+
+}
