@@ -30,7 +30,7 @@ router.post('/defects', function(req, res, next) {
     res.json('1')
 });
 
-router.post('/defects/:id', function(req, res, next) {
+router.delete('/defects/:id', function(req, res, next) {
     db['defects'].destroy(
         {
             where: {
