@@ -13,13 +13,21 @@ router.get('/activities', function(req, res, next) {
 });
 
 /* Дефекты */
-router.get('/defects', function(req, res, next) {
+router.post('/defects', function(req, res, next) {
     db['defects'].findAll({
         attributes: ['id', 'name', 'code']
     })
         .then(defects => {
             res.json(defects)
         });
+});
+
+router.post('/defects', function(req, res, next) {
+    db['defects'].create({
+        name: req.body.name,
+        code: req.body.code
+    });
+    res.json('1')
 });
 
 /* Модели */
