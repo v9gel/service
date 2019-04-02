@@ -13,7 +13,7 @@ router.get('/activities', function(req, res, next) {
 });
 
 /* Дефекты */
-router.post('/defects', function(req, res, next) {
+router.get('/defects', function(req, res, next) {
     db['defects'].findAll({
         attributes: ['id', 'name', 'code']
     })
