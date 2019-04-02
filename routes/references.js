@@ -30,6 +30,18 @@ router.post('/defects', function(req, res, next) {
     res.json('1')
 });
 
+router.post('/defects/:id', function(req, res, next) {
+    db['defects'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
 /* Модели */
 router.get('/models', function(req, res, next) {
     db['models'].findAll({
