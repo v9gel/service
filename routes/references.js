@@ -206,8 +206,6 @@ router.post('/subdivisions/:id', function(req, res, next) {
             kladr: '0000'
         },
         {where: {id: req.params.id}});
-
-    console.log(req.body)
     res.json(req.body)
 });
 
