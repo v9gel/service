@@ -12,6 +12,38 @@ router.get('/activities', function(req, res, next) {
         });
 });
 
+router.post('/activities', function(req, res, next) {
+    db['activities'].create({
+        name: req.body.name,
+        code: req.body.code
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/activities/:id', function(req, res, next) {
+    db['activities'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/activities/:id', function(req, res, next) {
+
+    db['activities'].update({
+            name: req.body.name,
+            code: req.body.code
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
+});
+
 /* Дефекты */
 router.get('/defects', function(req, res, next) {
     db['defects'].findAll({
