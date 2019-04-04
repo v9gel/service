@@ -201,7 +201,7 @@ router.post('/subdivisions/:id', function(req, res, next) {
     db['subdivisions'].update({
             name: req.body.name,
             code: req.body.code,
-            activityId: req.body.activity,
+            activityId: req.body.activity.id,
             password: '0000',
             kladr: '0000'
         },
