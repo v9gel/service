@@ -173,6 +173,44 @@ router.get('/subdivisions', function(req, res, next) {
 
 });
 
+router.post('/subdivisions', function(req, res, next) {
+    db['subdivisions'].create({
+        name: req.body.name,
+        code: req.body.code,
+        activityId: req.body.activity,
+        password: '0000',
+        kladr: '0000'
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/subdivisions/:id', function(req, res, next) {
+    db['subdivisions'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/subdivisions/:id', function(req, res, next) {
+
+    db['subdivisions'].update({
+            name: req.body.name,
+            code: req.body.code,
+            activityId: req.body.activity,
+            password: '0000',
+            kladr: '0000'
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
+});
+
 /* Получить список всех клиентов */
 router.get('/clients', function(req, res, next) {
     db['clients'].findAll({
