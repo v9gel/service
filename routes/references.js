@@ -42,6 +42,18 @@ router.delete('/defects/:id', function(req, res, next) {
         });
 });
 
+router.post('/defects/:id', function(req, res, next) {
+
+    db['defects'].update({
+            name: req.body.name,
+            code: req.body.code
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
+});
+
 /* Модели */
 router.get('/models', function(req, res, next) {
     db['models'].findAll({
