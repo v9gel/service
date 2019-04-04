@@ -27,7 +27,7 @@ router.post('/defects', function(req, res, next) {
         name: req.body.name,
         code: req.body.code
     });
-    res.json('1')
+    res.json({msg: 'true'})
 });
 
 router.delete('/defects/:id', function(req, res, next) {
