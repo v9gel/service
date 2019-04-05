@@ -106,6 +106,41 @@ router.get('/models', function(req, res, next) {
         });
 });
 
+router.post('/models', function(req, res, next) {
+    db['models'].create({
+        name: req.body.name,
+        code: req.body.code,
+        view: req.body.view.id,
+        provider: req.body.provider.id
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/models/:id', function(req, res, next) {
+    db['models'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/models/:id', function(req, res, next) {
+
+    db['models'].update({
+            name: req.body.name,
+            code: req.body.code,
+            view: req.body.view.id,
+            provider: req.body.provider.id
+        },
+        {where: {id: req.params.id}});
+    res.json(req.body)
+});
+
+
 /* Упаковки */
 router.get('/packs', function(req, res, next) {
     db['packs'].findAll({
@@ -115,6 +150,38 @@ router.get('/packs', function(req, res, next) {
             res.json(packs)
         });
 });
+
+
+router.post('/packs', function(req, res, next) {
+    db['packs'].create({
+        name: req.body.name
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/packs/:id', function(req, res, next) {
+    db['packs'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/packs/:id', function(req, res, next) {
+
+    db['packs'].update({
+            name: req.body.name
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
+});
+
 
 /* Статусы */
 router.get('/statuses', function(req, res, next) {
@@ -126,6 +193,38 @@ router.get('/statuses', function(req, res, next) {
         });
 });
 
+
+router.post('/statuses', function(req, res, next) {
+    db['statuses'].create({
+        name: req.body.name
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/statuses/:id', function(req, res, next) {
+    db['statuses'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/statuses/:id', function(req, res, next) {
+
+    db['statuses'].update({
+            name: req.body.name
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
+});
+
+
 /* Производители */
 router.get('/providers', function(req, res, next) {
     db['providers'].findAll({
@@ -134,6 +233,39 @@ router.get('/providers', function(req, res, next) {
         .then(providers => {
             res.json(providers)
         });
+});
+
+
+router.post('/providers', function(req, res, next) {
+    db['providers'].create({
+        name: req.body.name,
+        code: req.body.code
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/providers/:id', function(req, res, next) {
+    db['providers'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/providers/:id', function(req, res, next) {
+
+    db['providers'].update({
+            name: req.body.name,
+            code: req.body.code
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
 });
 
 /* Услуги */
@@ -154,6 +286,38 @@ router.get('/views', function(req, res, next) {
         .then(views => {
             res.json(views)
         });
+});
+
+router.post('/views', function(req, res, next) {
+    db['views'].create({
+        name: req.body.name,
+        code: req.body.code
+    });
+    res.json({msg: 'true'})
+});
+
+router.delete('/views/:id', function(req, res, next) {
+    db['views'].destroy(
+        {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(cleaner => {
+            res.json(cleaner)
+        });
+});
+
+router.post('/views/:id', function(req, res, next) {
+
+    db['views'].update({
+            name: req.body.name,
+            code: req.body.code
+        },
+        {where: {id: req.params.id}});
+
+    console.log(req.body)
+    res.json(req.body)
 });
 
 /* Подразделения */
