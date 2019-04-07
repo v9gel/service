@@ -1,5 +1,6 @@
 var Statuses = require("./statuses");
 var Clients = require("./clients");
+var Products = require("./products");
 
 module.exports = function(sequelize, Sequelize) {
   var Orders = sequelize.define("orders", {
@@ -27,6 +28,7 @@ module.exports = function(sequelize, Sequelize) {
 
   Orders.belongsTo(Statuses(sequelize, Sequelize));
   Orders.belongsTo(Clients(sequelize, Sequelize));
+  Orders.belongsTo(Products(sequelize, Sequelize));
 
   return Orders;
 };
