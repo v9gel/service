@@ -27,13 +27,13 @@ router.get("/subdivisions/not/:id", function(req, res, next) {
 });
 
 /* Вернуть изделия, которые имеют определённый статус */
-router.get("/products/", function(req, res, next) {
-  db["statuses"]
+router.get("/product/eq", function(req, res, next) {
+  db["products"]
     .findAll({
-      attributes: ["id", "name"]
+      attributes: ["id", "serial"]
     })
-    .then(statuses => {
-      res.json(statuses);
+    .then(products => {
+      res.json(products);
     });
 });
 

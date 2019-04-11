@@ -396,15 +396,12 @@ router.get("/clients", function(req, res, next) {
 
 /* Добавить нового клиента */
 router.post("/clients", function(req, res, next) {
-  db["clients"].create({
-    name: req.body.name,
-    surname: req.body.surname,
-    patronymic: req.body.patronymic,
-    phone: req.body.phone
-  });
   db["clients"]
-    .findAll({
-      attributes: ["id", "surname", "name", "patronymic", "phone"]
+    .create({
+      name: req.body.name,
+      surname: req.body.surname,
+      patronymic: req.body.patronymic,
+      phone: req.body.phone
     })
     .then(clients => {
       res.json(clients);
@@ -427,7 +424,7 @@ router.post("/clients/:id", function(req, res, next) {
   res.json(req.body);
 });
 
-/* Удалить клинта */
+/* Удалить клиента */
 router.delete("/clients/:id", function(req, res, next) {
   db["clients"]
     .destroy({
@@ -437,6 +434,46 @@ router.delete("/clients/:id", function(req, res, next) {
     })
     .then(cleaner => {
       res.json(cleaner);
+    });
+});
+
+/* Добавить новое изделие */
+router.post("/products", function(req, res, next) {
+  db["products"]
+    .create({
+      serial: req.body.serial,
+      date_begin: req.body.date_begin,
+      date_end: req.body.date_end,
+      modelId: req.body.model.id
+    })
+    .then(products => {
+      res.json(products);
+    });
+});
+
+/* Обновить информацию об изделии */
+router.post("/products/:id", function(req, res, next) {
+  db["products"].update(
+    {
+      serial: req.body.serial,
+      date_begin: req.body.date_begin,
+      date_end: req.body.date_end,
+      modelId: req.body.model.id
+    },
+    { where: { id: req.params.id } }
+  );
+  console.log(req.body);
+  res.json(req.body);
+});
+
+/* Получить список всех изделий */
+router.get("/products", function(req, res, next) {
+  db["products"]
+    .findAll({
+      attributes: ["id", "serial"]
+    })
+    .then(products => {
+      res.json(products);
     });
 });
 

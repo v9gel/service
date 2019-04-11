@@ -7,7 +7,13 @@ block content
   p Таблицы:
   ul
     li
-      a(href='/orders') Заказы
+      a(href='/orders/point') Заказы для точки
+
+    li
+      a(href='/references/products') Изделия
+    li
+      a(href='/listdefects/32') Дефекты наряд заказа с id = 32
+      
   p Справочники:
   ul
     li
@@ -36,4 +42,7 @@ block content
   ul
     li
       a(href='/filter/subdivisions/not/1') Подразделения без id = 1
+
+    li
+      a(href='/filter/product/eq') Изделия по определенному статусу
 

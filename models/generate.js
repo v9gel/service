@@ -289,7 +289,7 @@ defects.map(value => {
   db["defects"].create(value);
 });
 
-//Дефекты
+//Услуги
 let services = [
   {
     name: "Замена экрана",
@@ -306,4 +306,17 @@ let services = [
 ];
 services.map(value => {
   db["services"].create(value);
+});
+
+//Изделия
+let products = [
+  {
+    serial: "1020",
+    date_begin: "2018-10-17",
+    date_end: "2018-12-09",
+    modelId: 1
+  }
+];
+products.map(value => {
+  db["products"].create(value);
 });
