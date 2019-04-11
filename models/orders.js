@@ -1,6 +1,7 @@
 var Statuses = require("./statuses");
 var Clients = require("./clients");
 var Products = require("./products");
+var Defects = require("./defects");
 
 module.exports = function(sequelize, Sequelize) {
   var Orders = sequelize.define("orders", {
@@ -29,6 +30,13 @@ module.exports = function(sequelize, Sequelize) {
   Orders.belongsTo(Statuses(sequelize, Sequelize));
   Orders.belongsTo(Clients(sequelize, Sequelize));
   Orders.belongsTo(Products(sequelize, Sequelize));
+  Orders.associate = models => {
+    Orders.belongsToMany(Defects(sequelize, Sequelize), {
+      through: "OrderDefects",
+      as: "defects",
+      foreignKey: "orderId"
+    });
+  };
 
   return Orders;
 };

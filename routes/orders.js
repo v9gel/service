@@ -24,6 +24,13 @@ router.get("/point", function(req, res, next) {
           attributes: ["id", "surname", "name", "patronymic", "phone"]
         },
         {
+          model: db.Defects,
+          as: "defects",
+          required: false,
+          attributes: ["id", "name"],
+          through: { attributes: [] }
+        },
+        {
           model: db["products"],
           attributes: ["id", "serial", "date_begin", "date_end"],
           include: [
