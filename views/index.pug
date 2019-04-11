@@ -5,6 +5,15 @@ block content
   p Список используемых url-ов
 
   p Таблицы:
+  ul
+    li
+      a(href='/orders/point') Заказы для точки
+
+    li
+      a(href='/references/products') Изделия
+    li
+      a(href='/listdefects/32') Дефекты наряд заказа с id = 32
+      
   p Справочники:
   ul
     li
@@ -29,4 +38,11 @@ block content
       a(href='/references/subdivisions') Подразделения
     li
       a(href='/references/activities') Виды деятельности
+  p Фильтры:
+  ul
+    li
+      a(href='/filter/subdivisions/not/1') Подразделения без id = 1
+
+    li
+      a(href='/filter/product/eq') Изделия по определенному статусу
 
