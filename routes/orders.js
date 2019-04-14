@@ -3,9 +3,12 @@ var router = express.Router();
 var db = require("../models/index");
 
 /* Получить наряд-заказы для точки */
-router.get("/point", function(req, res, next) {
+router.get("/point/:page", function(req, res, next) {
   db["orders"]
-    .findAll({
+    .findAndCountAll({
+      offset:((req.params.page-1)*1),
+      limit : 1,
+      subQuery:false,
       attributes: [
         "id",
         "number",
@@ -53,14 +56,20 @@ router.get("/point", function(req, res, next) {
       ]
     })
     .then(activities => {
-      let ar = activities.map(value => {
+
+
+      console.log(activities.count);
+      console.log(activities.rows);
+
+
+      activities.rows = activities.rows.map(value => {
         value.product.valueGarant = [
           value.product.date_begin,
           value.product.date_end
         ];
         return value;
       });
-      res.json(ar);
+      res.json(activities);
     });
 });
 
