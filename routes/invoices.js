@@ -24,6 +24,8 @@ router.post("/", function(req, res, next) {
   res.render("index", { title: "Service API" });
 });
 
+
+
 /* Получить накладные для нужного подразделения */
 router.get("/:subdivision", function(req, res, next) {
   db["invoices"]
@@ -52,15 +54,16 @@ router.get("/:subdivision", function(req, res, next) {
             }
           ]
         },
-        {
+
+        /*{
           model: db["InvoiceProducts"],
           through: {
             where: {
               invoiceId: 1
             }
           }
-        },
-        /*{
+        },*/
+        {
           model: db["products"],
           as: "products",
           required: false,
@@ -76,7 +79,15 @@ router.get("/:subdivision", function(req, res, next) {
                 },
               ]
             },
-          ],*/
+            /*{
+              model: db['InvoiceProducts'],
+              attributes: ['id']
+              include: [{
+                model: db['packs'],
+                attributes: ['id', 'name']
+              }]
+            }*/
+          ]
           /*include: [
             {
               model: db["packs"],
@@ -84,16 +95,18 @@ router.get("/:subdivision", function(req, res, next) {
             }
           ],*/
           //through: { attributes: [] }
-      ],
+        }],
+
       where: {
         senderId: {
           [Op.eq]: req.params.subdivision
         }
       }
     })
-    .then(ar => {
-      res.json(ar);
+    .then(invoices => {
+      res.json(newInvoices);
     });
 });
+
 
 module.exports = router;
