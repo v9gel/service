@@ -13,7 +13,13 @@ router.post("/", function(req, res, next) {
       recipientId: req.body.recipient.id
     })
     .then(function(invoice) {
-      invoice.setProducts(req.body.products);
+
+
+      req.body.movingProducts.map(value => {
+        invoice.addProducts(value.product.id, { through: { packId: value.pack.id }})
+      })
+      //user.addProject(project, { through: { status: 'started' }})
+      //invoice.setProducts(req.body.products);
     });
   res.render("index", { title: "Service API" });
 });
