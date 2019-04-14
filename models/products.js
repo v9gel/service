@@ -16,7 +16,8 @@ module.exports = function(sequelize, Sequelize) {
     },
     date_end: {
       type: Sequelize.DATE
-    }
+    },
+    valueGarant: Sequelize.VIRTUAL
   });
 
   Products.belongsTo(Models(sequelize, Sequelize));
