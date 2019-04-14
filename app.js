@@ -9,6 +9,7 @@ var indexRouter = require("./routes/index");
 var referenncesRouter = require("./routes/references");
 var loginRouter = require("./routes/login");
 var ordersRouter = require("./routes/orders");
+var invoicesRouter = require("./routes/invoices");
 var filterRouter = require("./routes/filter");
 var listDefectsRouter = require("./routes/listDefects");
 var cors = require("cors");
@@ -45,6 +46,7 @@ app.use("/", indexRouter);
 app.use("/references", referenncesRouter);
 app.use("/login", loginRouter);
 app.use("/orders", ordersRouter);
+app.use("/invoices", invoicesRouter);
 app.use("/filter", filterRouter);
 app.use("/listdefects", listDefectsRouter);
 

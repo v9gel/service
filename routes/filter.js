@@ -27,13 +27,36 @@ router.get("/subdivisions/not/:id", function(req, res, next) {
 });
 
 /* Вернуть изделия, которые имеют определённый статус */
-router.get("/product/eq", function(req, res, next) {
-  db["products"]
+router.get("/product/eq/:status", function(req, res, next) {
+  db["orders"]
     .findAll({
-      attributes: ["id", "serial"]
+      attributes: ["id"],
+      include: [
+        {
+          model: db["products"],
+          attributes: ["id", "serial"],
+          include: [
+            {
+              model: db["models"],
+              attributes: ["id", "name"],
+              include: [
+                {
+                  model: db["views"],
+                  attributes: ["id", "name"]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      where: {
+        statusId: {
+          [Op.eq]: req.params.status
+        }
+      }
     })
-    .then(products => {
-      res.json(products);
+    .then(orders => {
+      res.json(orders);
     });
 });
 
