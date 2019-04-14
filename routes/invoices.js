@@ -104,7 +104,7 @@ router.get("/:subdivision", function(req, res, next) {
       }
     })
     .then(invoices => {
-      res.json(newInvoices);
+      res.json(invoices);
     });
 });
 
