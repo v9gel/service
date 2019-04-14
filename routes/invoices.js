@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models/index");
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 /* Создание накладной */
 router.post("/", function(req, res, next) {
@@ -18,8 +20,6 @@ router.post("/", function(req, res, next) {
       req.body.movingProducts.map(value => {
         invoice.addProducts(value.product.id, { through: { packId: value.pack.id }})
       })
-      //user.addProject(project, { through: { status: 'started' }})
-      //invoice.setProducts(req.body.products);
     });
   res.render("index", { title: "Service API" });
 });
@@ -31,23 +31,40 @@ router.get("/:subdivision", function(req, res, next) {
       attributes: ["id", "number", "date_receipt"],
       include: [
         {
-          model: db["statuses"],
-          attributes: ["id", "name"]
-        },
-        {
-          model: db["clients"],
-          attributes: ["id", "surname", "name", "patronymic", "phone"]
-        },
-        {
-          model: db["defects"],
-          as: "defects",
-          required: false,
+          model: db["subdivisions"],
+          as: "sender",
           attributes: ["id", "name"],
-          through: { attributes: [] }
+          include: [
+            {
+              model: db["activities"],
+              attributes: ["id", "name"]
+            }
+          ]
         },
         {
+          model: db["subdivisions"],
+          as: "recipient",
+          attributes: ["id", "name"],
+          include: [
+            {
+              model: db["activities"],
+              attributes: ["id", "name"]
+            }
+          ]
+        },
+        {
+          model: db["InvoiceProducts"],
+          through: {
+            where: {
+              invoiceId: 1
+            }
+          }
+        },
+        /*{
           model: db["products"],
-          attributes: ["id", "serial", "date_begin", "date_end"],
+          as: "products",
+          required: false,
+          attributes: ["id"],
           include: [
             {
               model: db["models"],
@@ -57,24 +74,24 @@ router.get("/:subdivision", function(req, res, next) {
                   model: db["views"],
                   attributes: ["id", "name"]
                 },
-                {
-                  model: db["providers"],
-                  attributes: ["id", "name"]
-                }
               ]
+            },
+          ],*/
+          /*include: [
+            {
+              model: db["packs"],
+              attributes: ["id", "name"]
             }
-          ]
+          ],*/
+          //through: { attributes: [] }
+      ],
+      where: {
+        senderId: {
+          [Op.eq]: req.params.subdivision
         }
-      ]
+      }
     })
-    .then(activities => {
-      let ar = activities.map(value => {
-        value.product.valueGarant = [
-          value.product.date_begin,
-          value.product.date_end
-        ];
-        return value;
-      });
+    .then(ar => {
       res.json(ar);
     });
 });

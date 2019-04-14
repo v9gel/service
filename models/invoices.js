@@ -18,11 +18,13 @@ module.exports = function(sequelize, Sequelize) {
   });
 
   Invoices.belongsTo(Subdivisions(sequelize, Sequelize), {
-    foreignKey: "senderId"
+    foreignKey: "senderId",
+    as: "sender"
   });
 
   Invoices.belongsTo(Subdivisions(sequelize, Sequelize), {
-    foreignKey: "recipientId"
+    foreignKey: "recipientId",
+    as: "recipient",
   });
 
   Invoices.associate = models => {
