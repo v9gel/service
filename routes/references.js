@@ -404,7 +404,7 @@ router.post("/clients", function(req, res, next) {
       phone: req.body.phone
     })
     .then(clients => {
-      res.json(clients);
+      res.json({msg: 'ok', data: clients});
     });
 });
 
@@ -417,11 +417,12 @@ router.post("/clients/:id", function(req, res, next) {
       patronymic: req.body.patronymic,
       phone: req.body.phone
     },
-    { where: { id: req.params.id } }
-  );
-
-  console.log(req.body);
-  res.json(req.body);
+    {
+        where: { id: req.params.id }
+    })
+      .then(client => {
+      res.json({msg: 'ok', data: client});
+  });
 });
 
 /* Удалить клиента */
@@ -432,8 +433,8 @@ router.delete("/clients/:id", function(req, res, next) {
         id: req.params.id
       }
     })
-    .then(cleaner => {
-      res.json(cleaner);
+    .then(client => {
+        res.json({msg: 'ok', data: client});
     });
 });
 
