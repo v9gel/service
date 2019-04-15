@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var db = require("../models/index");
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 /* Виды деятельности */
 router.get("/activities", function(req, res, next) {
@@ -157,6 +159,22 @@ router.get("/packs", function(req, res, next) {
     });
 });
 
+/* Получить конкретную упаковку */
+router.get("/packs/:pack", function(req, res, next) {
+    db["packs"]
+        .findAll({
+            attributes: ["id", "name"],
+            where: {
+                id: {
+                    [Op.eq]: req.params.pack
+                }
+            }
+        })
+        .then(pack => {
+            res.json(pack);
+        });
+});
+
 router.post("/packs", function(req, res, next) {
   db["packs"].create({
     name: req.body.name
@@ -183,7 +201,6 @@ router.post("/packs/:id", function(req, res, next) {
     },
     { where: { id: req.params.id } }
   );
-
   console.log(req.body);
   res.json(req.body);
 });
@@ -470,11 +487,61 @@ router.post("/products/:id", function(req, res, next) {
 router.get("/products", function(req, res, next) {
   db["products"]
     .findAll({
-      attributes: ["id", "serial"]
+        attributes: ["id", "serial", "date_begin", "date_end"],
+        include: [
+            {
+                model: db["models"],
+                attributes: ["id", "name", "code"],
+                include: [
+                    {
+                        model: db["views"],
+                        attributes: ["id", "name"]
+                    },
+                    {
+                        model: db["providers"],
+                        attributes: ["id", "name"]
+                    }
+                ]
+            }
+        ]
     })
     .then(products => {
       res.json(products);
     });
 });
+
+/* Получить конкретное изделие */
+router.get("/products/:product", function(req, res, next) {
+    db["products"]
+        .findAll({
+            attributes: ["id", "serial", "date_begin", "date_end"],
+            include: [
+                {
+                    model: db["models"],
+                    attributes: ["id", "name", "code"],
+                    include: [
+                        {
+                            model: db["views"],
+                            attributes: ["id", "name"]
+                        },
+                        {
+                            model: db["providers"],
+                            attributes: ["id", "name"]
+                        }
+                    ]
+                }
+            ],
+            where: {
+                id: {
+                    [Op.eq]: req.params.product
+                }
+            }
+        })
+        .then(products => {
+            res.json(products);
+        });
+});
+
+
 
 module.exports = router;
