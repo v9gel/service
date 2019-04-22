@@ -6,9 +6,9 @@ var db = require("../models/index");
 router.get("/point/:page", function(req, res, next) {
   db["orders"]
     .findAndCountAll({
-      offset:((req.params.page-1)*1),
-      limit : 1,
-      subQuery:false,
+      //offset:((req.params.page-1)*1),
+      //limit : 1,
+      //subQuery:false,
       attributes: [
         "id",
         "number",
